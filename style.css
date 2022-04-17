@@ -39,6 +39,7 @@ body {
     box-shadow: 6px 6px 10px rgba(39, 37, 37, 0.568);
     background: yellow;
     border-radius: 2px;
+    z-index: 100;
 
 
 }

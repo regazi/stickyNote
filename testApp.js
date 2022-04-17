@@ -14,8 +14,6 @@ function createAbout() {
     aboutGlass.classList.add('draggable')
     aboutGlass.innerText = aboutInfo.value
     document.body.append(aboutGlass)
-    //aboutGlass.style.left = aboutButton.getBoundingClientRect().left + 'px'
-    //aboutGlass.style.top = backsheet.getBoundingClientRect().bottom * 2 + 'px'
     aboutGlass.style.top = 70 + 'vh'
     aboutGlass.style.left = 48 + 'vw'
     console.log(aboutGlass.style.top)
@@ -53,23 +51,25 @@ function addNote() {
 
 }
 
+
 //dragging function-------------REVIST and be sure to DRY-----------------------------------------
 function dragIt() {
     let dragger = document.querySelectorAll('.draggable')
+    // prevent dragging API from initializing 
     dragger.forEach(dragger => {
         dragger.ondragstart = function () {
-
             return false;
         };
+        // start drag && bring selected note to front of z-index-----------------------------------
         dragger.onmousedown = function (event) {
             console.log('start')
-            // compensate for pointer positon in box and ensure postion
+            dragger.style.zIndex = 10 + counter++;
+            // compensate for pointer positon in box-----------------------------------------------
             let shiftX = event.clientX - dragger.getBoundingClientRect().left;
             let shiftY = event.clientY - dragger.getBoundingClientRect().top;
-            dragger.style.position = 'absolute';
-            dragger.style.zIndex = 100;
-            //document.body.append(dragger);
 
+
+            // drag tracking-----------------------------------------------------------------------
             moveAt(event.pageX, event.pageY);
 
             // moves the dragger at (pageX, pageY) coordinates
@@ -105,6 +105,7 @@ function dragIt() {
                     document.removeEventListener('mousemove', onMouseMove);
                     dragger.onmouseup = null;
                     document.body.append(dragger)
+                    dragger.style.zIndex = 10;
                     console.log('end')
 
                 }
