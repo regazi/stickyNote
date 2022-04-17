@@ -1,0 +1,154 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
+
+body {
+    background: linear-gradient(15deg, #ff00000a, #6fff0113, #003cff0a);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100vw;
+
+}
+
+.aboutGlass {
+    min-height: 2rem;
+    min-width: 2rem;
+    border: 1px solid black;
+}
+
+.draggable {
+    font-family: 'Square Peg', cursive;
+    font-weight: bold;
+    max-width: 12rem;
+    min-width: 8rem;
+    min-height: 8rem;
+    max-height: 12rem;
+    cursor: move;
+    position: absolute;
+    text-align: center;
+    align-items: center;
+    justify-content: center;
+    display: flex;
+    padding: 2rem;
+    box-shadow: 6px 6px 10px rgba(39, 37, 37, 0.568);
+    background: yellow;
+    border-radius: 2px;
+
+
+}
+
+#aboutInfo {
+    display: none;
+}
+
+.aboutMe {
+    position: relative;
+    display: inline-flex;
+    align-self: center;
+    justify-self: center;
+    z-index: 3;
+    margin-bottom: 20rem;
+    border: 1px solid black;
+}
+
+img {
+    max-height: 6rem;
+    max-width: 10rem;
+    flex-direction: column;
+    border-radius: 15px;
+    margin-top: 2rem;
+    border-radius: 56px;
+    box-shadow: 6px 6px 10px rgba(39, 37, 37, 0.568);
+}
+
+img:hover {
+    transform: scale(1.5);
+}
+
+
+
+.draggable:hover {
+    background-color: rgba(255, 255, 0, 0.726);
+}
+
+.draggable:active {
+    background-color: rgba(255, 255, 0, 0.473);
+
+}
+
+
+
+h1 {
+    font-size: 6vh;
+    position: absolute;
+    margin-bottom: 35vh;
+    width: fit-content;
+}
+
+h2 {
+    vertical-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: fit-content;
+}
+
+#mainPage {
+    justify-content: center;
+    height: fit-content;
+    width: fit-content;
+    margin: auto;
+}
+
+.buttonBar {
+
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-left: 25vw;
+    margin-right: 25vw;
+
+}
+
+
+
+.button {
+    min-width: 5rem;
+    background: rgba(47, 80, 99, 0.534);
+    border: none;
+    border-radius: 15px;
+    height: 2rem;
+    margin: 5rem;
+    cursor: pointer;
+    box-shadow: 6px 6px 10px rgba(39, 37, 37, 0.568);
+}
+
+.button:hover {
+    transform: scale(1.2);
+}
+
+.glass {
+    margin-top: 10vh;
+    border-radius: 35px;
+    min-height: 70vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-left: 25vw;
+    margin-right: 25vw;
+    box-shadow: 6px 6px 10px rgba(39, 37, 37, 0.568);
+    background: linear-gradient(35deg, #3f87a6a1, #ebf8e191, #3cf6e78a);
+
+}
+
+input {
+    font-weight: 200;
+
+}

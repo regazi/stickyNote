@@ -1,24 +1,28 @@
 let noteInput = document.getElementById('noteInput')
-let backsheet = document.getElementById('container')
+let backsheet = document.getElementById('stage')
 let counter = 1
-const reload = [JSON.parse(localStorage.getItem('reload'))].toString
-let reload2 = JSON.stringify(reload)
-/*
-window.onload = function () {
-    console.log(reload2 + 'current')
-
-    reload.forEach(reload => {
-
-        addNote(reload)
-        dragIt()
+const aboutButton = document.getElementById('about')
+let aboutInfo = document.getElementById('aboutInfo')
+const bar = document.getElementById('bar')
 
 
 
 
-    });
+aboutButton.addEventListener('click', createAbout)
+function createAbout() {
+    let aboutGlass = document.createElement('div')
+    aboutGlass.classList.add('draggable')
+    aboutGlass.innerText = aboutInfo.value
+    document.body.append(aboutGlass)
+    //aboutGlass.style.left = aboutButton.getBoundingClientRect().left + 'px'
+    //aboutGlass.style.top = backsheet.getBoundingClientRect().bottom * 2 + 'px'
+    aboutGlass.style.top = 70 + 'vh'
+    aboutGlass.style.left = 48 + 'vw'
+    console.log(aboutGlass.style.top)
+
+
+    dragIt()
 }
-*/
-
 
 
 
@@ -29,7 +33,7 @@ noteInput.addEventListener('keypress', function (e) {
     if (e.key === 'Enter') {
         addNote()
         dragIt()
-        updateLS(e.getItem())
+
     }
 
 })
@@ -45,18 +49,11 @@ function addNote() {
         backsheet.appendChild(newYellow)
         noteInput.value = ""
         console.log(newYellow.id)
-
     })
 
 }
 
-function moveAt(dragger, pageX, pageY) {
-    dragger.style.left = pageX - shiftX + 'px';
-    dragger.style.top = pageY - shiftY + 'px';
-    //console.log(pageX, pageY)
-}
-
-//dragging function-------------REVIST AND BE SURE TO DRY-----------------------------------------
+//dragging function-------------REVIST and be sure to DRY-----------------------------------------
 function dragIt() {
     let dragger = document.querySelectorAll('.draggable')
     dragger.forEach(dragger => {
@@ -70,23 +67,30 @@ function dragIt() {
             let shiftX = event.clientX - dragger.getBoundingClientRect().left;
             let shiftY = event.clientY - dragger.getBoundingClientRect().top;
             dragger.style.position = 'absolute';
-            dragger.style.zIndex = 1000;
+            dragger.style.zIndex = 100;
             //document.body.append(dragger);
 
-            moveAt(dragger, event.pageX, event.pageY);
+            moveAt(event.pageX, event.pageY);
 
             // moves the dragger at (pageX, pageY) coordinates
             // taking initial shifts into account
+            function moveAt(pageX, pageY) {
+                dragger.style.left = pageX - shiftX + 'px';
+                dragger.style.top = pageY - shiftY + 'px';
+                //console.log(pageX, pageY)
+            }
 
             function onMouseMove(event) {
-                moveAt(dragger, event.pageX, event.pageY);
+                event.preventDefault()
+                moveAt(event.pageX, event.pageY);
             }
 
             // move the dragger on mousemove
             document.addEventListener('mousemove', onMouseMove);
 
             // drop the dragger, append if on playing field || delete if over trashcan
-            dragger.onmouseup = function () {
+            dragger.onmouseup = function (event) {
+                event.preventDefault()
                 let dragBox = dragger.getBoundingClientRect()
                 let imgBox = img.getBoundingClientRect();
 
@@ -94,10 +98,8 @@ function dragIt() {
                     console.log('deleteIsWorking')
                     document.removeEventListener('mousemove', onMouseMove);
                     dragger.onmouseup = null;
-                    dragger.classList.remove('draggable')
                     dragger.classList.add('goneForever')
                     dragger.remove()
-
 
                 } else {
                     document.removeEventListener('mousemove', onMouseMove);
@@ -115,17 +117,5 @@ function dragIt() {
 
 }
 
-function updateLS(stickyNote) {
-    const repo = []
 
-    if (stickyNote.innerText.length > 0) {
-        repo.push({
-            text: stickyNote.innerText
-        })
 
-        localStorage.setItem('repo', JSON.stringify
-            (repo))
-        localStorage.setItem
-    }
-
-}
