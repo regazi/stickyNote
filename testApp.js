@@ -153,7 +153,7 @@ function addNote() {
 }
 
 
-//-----------------------dragging function-------------REVIST and be sure to DRY-----------------------------------------
+//-----------------------dragging function---------------------------------------------------------------
 function dragIt() {
     let dragger = document.querySelectorAll('.draggable')
     // prevent dragging API from initializing 
