@@ -1,2 +1,2 @@
 # stickyNote
-Nothing to see here, just a novice at practice. 
+Nothing to see here, just a student at practice. 
