@@ -6,7 +6,10 @@ let aboutInfo = document.getElementById('aboutInfo');
 const bar = document.getElementById('bar');
 let clicks = 0;
 const can = document.getElementById('img');
-let discarded = []
+let discarded = [];
+const quotes = ['See some bugs? let Me Know!', 'See some bugs? let Me Know!']
+
+
 
 can.addEventListener('click', openDeleteList);
 
@@ -48,7 +51,7 @@ button.style.minWidth = 4 + 'vw';
 button.style.minHeight = 4 + 'vh';
 button.style.marginTop = 4 + 'vh';
 button.setAttribute('id', 'clearTrash');
-box.style.top = 70 + 'vh';
+box.style.bottom = 25 + 'vh';
 box.style.left = 60 + 'vw';
 box.setAttribute('id', 'discardedBox')
 
@@ -62,23 +65,21 @@ button.onclick = clearTrash => {
 }
 
 
-
+//let freshNote = discarded.filter(discarded => discarded.valueOf());
 //generateList
 function generateList() {
     discarded.forEach((discarded) => {
         let item = document.createElement('li');
         item.innerText = discarded.valueOf();
-        item.classList.add('draggableTrash')
-        item.setAttribute('id', 'items')
+        item.classList.add('draggableTrash');
+        item.setAttribute('id', 'items');
         box.append(item);
-        console.log('shityeh')
     })
-
+    discarded = []
 }
 
 //open trash box
-async function maxDeleteBox() {
-    generateList()
+function maxDeleteBox() {
     box.append(button)
     document.body.append(box);
     makeTdrag()
@@ -151,8 +152,40 @@ function addNote() {
     })
 
 }
+/*
+item = quotes[Math.floor(Math.random() * quotes.length)]
+//set up element for instruction aleart. Asynch 
+let alrt = document.createElement('div')
+alrt.setAttribute('id', 'alrt')
+alrt.innerText = item.valueOf()
+//'I built this bubble to cover up a bug that is now fixed, but it took some time to do, due to my shitty nesting so... Ill leave it';
+alrt.style.left = 50 + 'vw'
+alrt.style.top = 1 + 'vh'
 
+function displayAleart() {
 
+    function resolveAfter2seconds(t) {
+        return new Promise(resolve => {
+            setTimeout(() => {
+                resolve(t);
+            }, 2000);
+        });
+    }
+
+    function displayA() {
+
+        backsheet.append(alrt)
+    }
+
+    async function fadeA() {
+        //  let alrt = document.getElementById('alrt')
+        let tOut = await resolveAfter2seconds(2)
+        alrt.remove()
+    }
+    displayA()
+    fadeA()
+}
+*/
 //-----------------------dragging function---------------------------------------------------------------
 function dragIt() {
     let dragger = document.querySelectorAll('.draggable')
@@ -163,27 +196,81 @@ function dragIt() {
         };
         // start drag && bring selected note to front of z-index-----------------------------------
         dragger.onmousedown = function (event) {
+            //  displayAleart()
             dragger.style.zIndex = 10 + counter++;
             // compensate for pointer positon in box-----------------------------------------------
             let shiftX = event.clientX - dragger.getBoundingClientRect().left;
             let shiftY = event.clientY - dragger.getBoundingClientRect().top;
 
 
+
+
+
+
+
+
+
+
+            let dragBox = dragger.getBoundingClientRect()
+            if (dragBox.left - event.pageX < - 50 && dragBox.left - event.pageX > -170) {
+
+                //document.addEventListener('keypress', function (e) {
+                document.addEventListener('keypress', keyValue)
+                function keyValue(e) {
+                    if (e.key === 'a') {
+                        rotateLeft()
+                    } else if (e.key === 'd') {
+                        rotateRight()
+                    } else {
+                        // document.removeEventListener('keypress', keyValue)
+                        return;
+                    }
+
+                }
+
+                let baseline = 0
+                function rotateLeft() {
+                    dragger.style.transform = "rotate(" + baseline++ + "deg)"
+                }
+                function rotateRight() {
+                    dragger.style.transform = "rotate(" + baseline-- + "deg)"
+                }
+
+
+
+            }
+
+
             // drag tracking-----------------------------------------------------------------------
             moveAt(event.pageX, event.pageY);
+
+            //bubble = alert
+            //            moveBubble(event.pageX, event.pageY)
+
+            //            function moveBubble(pageX, pageY) {
+            //                alrt.style.left = pageX + 'px';
+            //                alrt.style.top = pageY - 200 + 'px';
+            //           }
 
             // moves the dragger at (pageX, pageY) coordinates
             // taking initial shifts into account
             function moveAt(pageX, pageY) {
                 dragger.style.left = pageX - shiftX + 'px';
                 dragger.style.top = pageY - shiftY + 'px';
+
                 //console.log(pageX, pageY)
             }
 
             function onMouseMove(event) {
                 event.preventDefault()
                 moveAt(event.pageX, event.pageY);
+                //                try {
+                //                    moveBubble(event.pageX, event.pageY);
             }
+            //              catch {
+            //                 return;
+            //              }
+            //            }
 
             // move the dragger on mousemove
             document.addEventListener('mousemove', onMouseMove);
@@ -200,8 +287,10 @@ function dragIt() {
                     dragger.onmouseup = null;
                     discarded.push(dragger.innerHTML)
                     dragger.remove();
+                    generateList()
 
                 } else {
+                    document.removeEventListener('keypress', keyValue)
                     document.removeEventListener('mousemove', onMouseMove);
                     dragger.onmouseup = null;
                     document.body.append(dragger)
