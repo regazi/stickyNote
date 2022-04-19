@@ -16,6 +16,17 @@ body {
 
 }
 
+#alrt {
+    position: absolute;
+    margin: 0;
+    z-index: 100;
+    max-width: 15vw;
+    background: rgba(196, 104, 104, 0.767);
+    padding: 6px;
+    border-radius: 15px;
+
+}
+
 .aboutGlass {
     min-height: 2rem;
     min-width: 2rem;
@@ -55,7 +66,8 @@ body {
     font-weight: bold;
     font-size: 3vh;
     color: whitesmoke;
-    min-width: 15vw;
+    min-width: 20vw;
+    max-width: 22vw;
     min-height: 15vh;
     cursor: pointer;
     position: absolute;
