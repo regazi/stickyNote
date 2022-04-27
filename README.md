@@ -1,2 +1,2 @@
 # stickyNote
-Nothing to see here, just a student at practice. 
+sticky note app with rotate bound to the 'a' and 'd' keys.
