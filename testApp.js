@@ -158,7 +158,7 @@ item = quotes[Math.floor(Math.random() * quotes.length)]
 let alrt = document.createElement('div')
 alrt.setAttribute('id', 'alrt')
 alrt.innerText = item.valueOf()
-//'I built this bubble to cover up a bug that is now fixed, but it took some time to do, due to my shitty nesting so... Ill leave it';
+//'I built this bubble to cover up a bug that is now fixed, but it took some time to do, due to some badly nested code so, I'll leave it for now';
 alrt.style.left = 50 + 'vw'
 alrt.style.top = 1 + 'vh'
 
